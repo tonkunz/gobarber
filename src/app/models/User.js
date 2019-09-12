@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize'
+import bcrypt from 'bcryptjs'
 
 class User extends Sequelize.Model {
   static init(sequelize) {
@@ -6,6 +7,7 @@ class User extends Sequelize.Model {
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
+        password: Sequelize.VIRTUAL, // Campo que nunca existirá no BD Físico
         password_hash: Sequelize.STRING,
         provider: Sequelize.BOOLEAN
       },
@@ -13,6 +15,14 @@ class User extends Sequelize.Model {
         sequelize
       }
     )
+
+    this.addHook('beforeSave', async user => {
+      if (user.password) {
+        user.password_hash = await bcrypt.hash(user.password, 8)
+      }
+    })
+
+    return this
   }
 }
 
