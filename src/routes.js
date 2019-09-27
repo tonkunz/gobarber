@@ -9,6 +9,7 @@ import FileController from './app/controllers/FileController'
 import ProviderController from './app/controllers/ProviderController'
 import AppointmentController from './app/controllers/AppointmentController'
 import ScheduleController from './app/controllers/ScheduleController'
+import NotificationsController from './app/controllers/NotificationController'
 
 // Middlewares
 import authMiddleware from './app/middlewares/auth'
@@ -30,5 +31,7 @@ routes.post('/appointments', AppointmentController.store)
 routes.get('/appointments', AppointmentController.index)
 // Schedule Route
 routes.get('/schedules', ScheduleController.index)
+// Notifications
+routes.get('/notifications', NotificationsController.index)
 
 export default routes

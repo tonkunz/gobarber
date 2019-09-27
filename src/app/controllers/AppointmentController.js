@@ -48,6 +48,10 @@ class AppointmentController {
 
     const { provider_id, date } = req.body
 
+    if (provider_id === req.userId) {
+      return res.status(400).json({ error: 'User and provider is a same id' })
+    }
+
     const isProvider = await User.findOne({
       where: { id: provider_id, provider: true }
     })
