@@ -9,7 +9,7 @@ import FileController from './app/controllers/FileController'
 import ProviderController from './app/controllers/ProviderController'
 import AppointmentController from './app/controllers/AppointmentController'
 import ScheduleController from './app/controllers/ScheduleController'
-import NotificationsController from './app/controllers/NotificationController'
+import NotificationController from './app/controllers/NotificationController'
 
 // Middlewares
 import authMiddleware from './app/middlewares/auth'
@@ -29,9 +29,11 @@ routes.post('/files', upload.single('file'), FileController.store)
 // Appointment Routes
 routes.post('/appointments', AppointmentController.store)
 routes.get('/appointments', AppointmentController.index)
+routes.delete('/appointments/:id', AppointmentController.delete)
 // Schedule Route
 routes.get('/schedules', ScheduleController.index)
 // Notifications
-routes.get('/notifications', NotificationsController.index)
+routes.get('/notifications', NotificationController.index)
+routes.put('/notifications/:id', NotificationController.update)
 
 export default routes
